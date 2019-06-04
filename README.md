@@ -8,6 +8,8 @@ Laya2.0 Honor Webpack
 
 ### [honor](http://172.21.1.184/jk_html/honor.git)
 
+前端 view 层框架
+
 #### 常用接口
 
 [运行游戏](./src/main.ts#L21)
@@ -27,9 +29,9 @@ Honor.run(GameConfig: any, callback: any): void;
    * @param url loading页面的url
    * @param callback 完成的callback
    */
-Honor.director.setLoadPageForScene(GameConfig: any, callback: any): void;
+Honor.director.setLoadPageForScene(url: any, callback: any): void;
 
-/** LoadScene 需要 implements HonorLoadScene */
+/** LoadScene 需要 实现的接口 */
 export interface HonorLoadScene {
     /** 关闭调用 */
     onReset(): void;
@@ -48,7 +50,7 @@ export interface HonorLoadScene {
     * @param url 场景的url
     * @param params 场景 onMounted 接收的参数
    */
-Honor.director.runScene(url: any, callback: any): void;
+Honor.director.runScene(url: any, ...param: any[]): void;
 
 /** 场景需要 implements HonorLoadScene */
 export interface HonorScene extends Laya.Scene {
@@ -63,8 +65,10 @@ export interface HonorScene extends Laya.Scene {
     * 运行场景
     * @param url 场景的url
     * @param params 场景 onMounted 接收的参数
+    * @param config dialog的配置
+    * @param use_exist 是否使用已经创建好的实例(使用设置为true, 就会忽略config的配置)
    */
-Honor.director.openDialog(url: any, callback: any): void;
+Honor.director.openDialog(url: any, params: any[], config?: HonorDialogConfig, use_exist = false): void;
 
 /** dialog 需要实现的接口 */
 export interface HonorDialog extends Laya.Dialog {
@@ -106,7 +110,7 @@ Honor.DEBUG_MODE;
 
 ### 工具
 
-在 script 目录下有常用工具 js, 注意项目中的文件夹中的 config.demo.json(不要删除这个文件), 将他们复制一份重命名为 config.json(git 会 ignore 这个文件), 然后修改里面的配置
+在 script 目录下有常用 js 工具文件, 注意项目中的文件夹中的 config.demo.json(不要删除这个文件), 将他们复制一份重命名为 config.json(git 会 ignore 这个文件), 然后修改里面的配置
 
 [生成版本号]
 会在 bin 目录下生成一个 version.json 包含当前项目所有文件的版本号
@@ -114,6 +118,8 @@ Honor.DEBUG_MODE;
 ```bash
 npm run genVersion
 ```
+
+config.json 的自定义匹配值
 
 ```json
   // json中只需要修改此项, 本地前端项目的根目录
@@ -126,6 +132,8 @@ npm run genVersion
 ```bash
 npm run compressImg
 ```
+
+config.json 的自定义匹配值
 
 ```json
   // json中只需要修改此项, gamehall中游戏
