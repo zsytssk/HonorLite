@@ -10,6 +10,9 @@ export default class Login extends ui.scenes.loginUI {
         console.log(...params);
         this.initEvent();
     }
+    public onResize(width: number, height: number) {
+        console.log('Scene onResize', width, height);
+    }
     private initEvent() {
         const { open_dialog, enter_start } = this;
         const { CLICK } = Laya.Event;

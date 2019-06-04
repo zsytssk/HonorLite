@@ -4,7 +4,12 @@ import './ui/layaMaxUI';
 import Login from './view/scenes/login';
 
 function onStart() {
-    Login.preEnter();
+    Honor.director.setLoadPageForScene(
+        'Scenes/Loading.scene',
+        Laya.Handler.create(this, () => {
+            Login.preEnter();
+        })
+    );
 }
 
 Honor.run(GameConfig, onStart);
