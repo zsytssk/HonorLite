@@ -1,7 +1,9 @@
 import { ui } from '../../ui/layaMaxUI';
+import { HonorLoadScene } from 'honor';
 
 /** loading场景 */
-export default class LoadingScene extends ui.scenes.loadingUI {
+export default class LoadingScene extends ui.scenes.loadingUI
+    implements HonorLoadScene {
     constructor() {
         super();
     }

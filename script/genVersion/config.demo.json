@@ -1,0 +1,8 @@
+{
+    "project_folder": "本地项目地址",
+    "bin": "bin",
+    "laya_assets": "laya/assets",
+    "laya_pages": "laya/pages",
+    "binJs": "bin/main.js",
+    "include": ["src", "test", "libs", "laya/pages", "laya/assets", "bin/libs"]
+}

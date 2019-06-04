@@ -1,5 +1,5 @@
 import GameConfig from './GameConfig';
-import * as Honor from 'honor.js';
+import { Honor } from 'honor';
 import './ui/layaMaxUI';
 import Login from './view/scenes/login';
 

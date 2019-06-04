@@ -4,7 +4,7 @@ const webpack = require('webpack');
 const findParam = require('./script/findEnv');
 
 let common_config = {
-    entry: ['./src/main.ts', './test/test.ts'],
+    entry: ['./src/main', './test/test'],
     output: {
         filename: 'js/bundle.js',
         path: path.join(__dirname, 'bin'),

@@ -1,10 +1,11 @@
-import * as Honor from 'honor.js';
 import { ui } from '../../ui/layaMaxUI';
+import { HonorDialog } from 'honor';
 
-export default class Alert extends ui.pop.alertUI {
+export default class Alert extends ui.pop.alertUI implements HonorDialog {
     constructor() {
         super();
     }
+    /** 只会在弹出层第一次创建完成的时候执行 */
     public onAwake() {
         this.initEvent();
     }
