@@ -2,79 +2,111 @@
 
 declare const name = "Honor";
 declare const version = "0.0.1-beta";
-declare const load: (params_0: any, params_1?: any) => Promise<unknown>;
 declare let DEBUG_MODE: boolean;
 declare global {
-    interface Window {
-        Laya3D: any;
-    }
+        interface Window {
+                Laya3D: any;
+        }
 }
 /** 运行游戏
-  * @param GameConfig 是Laya自动生成的游戏配置 src/GameConfig
-  * @param callback 游戏运行完成之后执行函数
-  */
+    * @param GameConfig 是Laya自动生成的游戏配置 src/GameConfig
+    * @param callback 游戏运行完成之后执行函数
+    */
 declare function run(GameConfig: any, callback: any): void;
 export declare const Honor: {
-    name: string;
-    version: string;
-    run: typeof run;
-    director: {
+        name: string;
+        version: string;
+        run: typeof run;
+        director: {
+                init(): void;
+                onResize(): void;
+                runScene(url: string, ...params: any[]): Promise<void | Laya.Scene>;
+                readonly runningScene: import("./UI/View").HonorScene;
+                openDialog(url: any, params?: any[], config?: import("./UI/Base/Dialog").HonorDialogConfig, use_exist?: boolean): Promise<import("./UI/Base/Dialog").HonorDialog>;
+                load(res: import("./Utils/loadRes").ResItem[] | string[], type?: import("./UI/View").ViewType): Promise<unknown>;
+                getDialogByName(name: any): laya.display.Node;
+                getDialogsByGroup(group: any): any[];
+                closeDialogByName(name: any): void;
+                closeDialogsByGroup(group: any): void;
+                closeAllDialogs(): void;
+                setLoadPageForScene(url: string, callback: Laya.Handler): void;
+                setLoadPageForDialog(url: string, callback: Laya.Handler): void;
+        };
+        utils: {
+                /** 运行游戏
+                    * @param GameConfig 是Laya自动生成的游戏配置 src/GameConfig
+                    * @param callback 游戏运行完成之后执行函数
+                    */
+                createSkeleton: typeof import("./Utils/createSkeleton").createSkeleton;
+                extend: typeof import("./Utils/extends").extend;
+                cutStr: typeof import("./Utils/cutStr").cutStr;
+                getStringLength: typeof import("./Utils/getStringLength").getStringLength;
+                formatTime: typeof import("./Utils/formatTime").formatTime;
+                formatMoney: typeof import("./Utils/formatMoney").formatMoney;
+                getHtmlElementSize: typeof import("./Utils/getHtmlElementSize").getHtmlElementSize;
+                sceneChangeMonitor: typeof import("./Utils/sceneChangeMonitor");
+                loadRes: typeof import("./Utils/loadRes").loadRes;
+        };
+        DEBUG_MODE: boolean;
+};
+export { name, version, run, director, utils, DEBUG_MODE };
+
+export const Director: {
         init(): void;
         onResize(): void;
-        runScene(url: any, ...params: any[]): Promise<void | Laya.Scene>;
-        readonly runningScene: any;
-        openDialog(url: any, params?: any[], config?: import("./UI/Base/Dialog").HonorDialogConfig, use_exist?: boolean): Promise<import("./UI/Base/Dialog").HonorDialog>;
+        /**
+            * 运行场景
+            * @param url 场景的url
+            * @param params 场景 onMounted 接收的参数
+            */
+        runScene(url: string, ...params: any[]): Promise<void | Laya.Scene>;
+        /**
+            * 获取当前正在运行场景
+            * @param url 场景的url
+            * @param params 场景 onMounted 接收的参数
+            */
+        readonly runningScene: HonorScene;
+        /**
+            * 打开弹出层
+            * @param url 弹出层
+            * @param params 场景 onMounted 接收的参数
+            * @param config 弹出层的配置
+            */
+        openDialog(url: any, params?: any[], config?: HonorDialogConfig, use_exist?: boolean): Promise<import("./Base/Dialog").HonorDialog>;
+        load(res: ResItem[] | string[], type?: ViewType): Promise<unknown>;
         getDialogByName(name: any): laya.display.Node;
         getDialogsByGroup(group: any): any[];
         closeDialogByName(name: any): void;
         closeDialogsByGroup(group: any): void;
         closeAllDialogs(): void;
-        setLoadPageForScene(url: any, callback: any): void;
-        setLoadPageForDialog(url: any, callback: any): void;
-    };
-    load: (params_0: any, params_1?: any) => Promise<unknown>;
+        /** 设置场景切换的loading页面
+            * @param url loading页面的url
+            * @param callback 完成的callback
+            */
+        setLoadPageForScene(url: string, callback: Laya.Handler): void;
+        setLoadPageForDialog(url: string, callback: Laya.Handler): void;
+};
+
+export const utils: {
+    createSkeleton: typeof createSkeleton;
+    extend: typeof extend;
+    cutStr: typeof cutStr;
+    getStringLength: typeof getStringLength;
+    formatTime: typeof formatTime;
+    formatMoney: typeof formatMoney;
+    getHtmlElementSize: typeof getHtmlElementSize;
     sceneChangeMonitor: typeof sceneChangeMonitor;
-    DirectorView: {
-        init(): void;
-        onResize(width: any, height: any): void;
-        _createLoadViewByClass(loadType: any, callback: any, view: any): void;
-        _createLoadViewByData(type: any, url: any, callback: any, obj: any): void;
-        recoverView(view: any): void;
-        getViewByPool(url: any): any;
-        createView(data: any, ctor: any, url: string, params?: any[]): Promise<unknown>;
-        setLoadView(type: import("./UI/View").ViewType, url: string, callback: any): void;
-        setLoadViewVisible(type: import("./UI/View").ViewType, visible: boolean): void;
-        setLoadProgress(type: any, val: any): void;
-        getView(type: any): any;
-        setViewVisible(type: any, visible: any): void;
-        addView(type: any, view: any): void;
-        addViewAt(type: any, view: any, index: any): void;
-    };
-    DEBUG_MODE: boolean;
-};
-export { name, version, run, Director as director, load, sceneChangeMonitor, DirectorView, DEBUG_MODE, };
-
-export const Director: {
-    init(): void;
-    onResize(): void;
-    runScene(url: any, ...params: any[]): Promise<void | Laya.Scene>;
-    readonly runningScene: any;
-    openDialog(url: any, params?: any[], config?: HonorDialogConfig, use_exist?: boolean): Promise<import("./Base/Dialog").HonorDialog>;
-    getDialogByName(name: any): laya.display.Node;
-    getDialogsByGroup(group: any): any[];
-    closeDialogByName(name: any): void;
-    closeDialogsByGroup(group: any): void;
-    closeAllDialogs(): void;
-    setLoadPageForScene(url: any, callback: any): void;
-    setLoadPageForDialog(url: any, callback: any): void;
+    loadRes: typeof loadRes;
 };
 
-export function onSceneChangeBefore(fn: SceneChangeListener): void;
-export function onSceneChangeAfter(fn: SceneChangeListener): void;
-export function clearListener(fn: SceneChangeListener): void;
+/**  Honor中scene支持的接口 */
+export interface HonorScene {
+    onMounted?(...params: any[]): void;
+    onResize?(width?: number, height?: number): void;
+}
 
 export interface HonorLoadScene {
-    /** 关闭调用 */
+    /** 关闭前调用 */
     onReset(): void;
     /** 打开调用 */
     onShow(): void;
@@ -127,6 +159,100 @@ export interface HonorDialog extends Laya.Dialog {
     onMounted?(...params: any[]): void;
     onResize?(width?: number, height?: number): void;
 }
+
+export declare type FunProgress = (progress: number) => void;
+export declare type ResItem = {
+    url: string;
+    type: string;
+};
+/** 加载资源... */
+export declare function loadRes(res: ResItem[] | string[], on_progress?: FunProgress): Promise<unknown>;
+
+/**
+  * @public
+  * 创建骨骼动画
+  * @param {String} path 骨骼动画路径
+  * @param {Number} rate 骨骼动画帧率，引擎默认为30，一般传24
+  * @param {Number} type 动画类型 0,使用模板缓冲的数据，模板缓冲的数据，不允许修改	（内存开销小，计算开销小，不支持换装） 1,使用动画自己的缓冲区，每个动画都会有自己的缓冲区，相当耗费内存 （内存开销大，计算开销小，支持换装） 2,使用动态方式，去实时去画	（内存开销小，计算开销大，支持换装,不建议使用）
+  *
+  * @return 骨骼动画
+  */
+export function createSkeleton(path: any, rate?: any, type?: any): laya.ani.bone.Skeleton;
+
+/**
+  * @public
+  * 将两个或更多对象的内容合并到第一个对象。使用方式见Jquery.extend
+  * 调用方式
+  * Sail.Utils.extend( [deep ], target, object1 [, objectN ] )
+  * Sail.Utils.extend( target [, object1 ] [, objectN ] )
+  *
+  * @return 合并后的对象
+  */
+export function extend(): any;
+
+/**
+  * @public
+  * 按指定长度截取字符串
+  * @param {String} str 要截取长度的字符串
+  * @param {Number} length 字符串长度
+  *
+  * @return 截取长度后的字符串
+  */
+export function cutStr(text: any, length: any): any;
+
+/**
+  * @public
+  * 获取字符串长度，支持中文
+  * @param {String} str 要获取长度的字符串
+  *
+  * @return 字符串长度
+  */
+export function getStringLength(str: any): number;
+
+/**
+  * @public
+  * 将毫秒转换为`{h}小时{m}分钟{s}秒`的格式
+  * @param {Number} total 毫秒数
+  *
+  * @return 格式化后的字符串
+  */
+export function formatTime(total: any): string;
+
+/**
+  * 格式化数字
+  * @param {number} number 要格式化的数字
+  * @param {number} places 保留的小数位，默认不保留
+  * @param {string} symbol 货币符号
+  * @param {string} thousand 千位分隔符，默认为“,”
+  * @param {string} decimal 小数位符号
+  *
+  * @return 格式化后的货币字符
+  */
+export function formatMoney(number?: number, places?: number, symbol?: string, thousand?: string, decimal?: string): string;
+
+/**
+  * @public
+  * 获取HTMLDivElement的宽高
+  * @param {Laya.HTMLDivElement} html 要获取宽高的HTMLDivElement元素
+  *
+  * @return HTMLDivElement的宽高，{width,height}
+  */
+export function getHtmlElementSize(html: any): {
+    width: any;
+    height: any;
+};
+
+export type FunProgress = (progress: number) => void;
+export type ResItem = {
+    url: string;
+    type: string;
+};
+/** 加载资源... */
+export function loadRes(res: ResItem[] | string[], on_progress?: FunProgress): Promise<unknown>;
+
+export function onSceneChangeBefore(fn: SceneChangeListener): void;
+export function onSceneChangeAfter(fn: SceneChangeListener): void;
+export function clearListener(fn: SceneChangeListener): void;
 
 export type SceneChangeListener = (cur1: string, cur2: string) => boolean | void;
 export type SceneChangeData = {
