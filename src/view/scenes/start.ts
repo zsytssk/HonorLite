@@ -1,5 +1,5 @@
 import { ui } from '../../ui/layaMaxUI';
-import * as Honor from 'honor.js';
+import * as Honor from 'honor';
 import Login from './login';
 
 export default class Start extends ui.scenes.startUI {

@@ -3,14 +3,19 @@ import { Honor } from 'honor';
 import './ui/layaMaxUI';
 import Login from './view/scenes/login';
 
-function onStart() {
-    Honor.director.setLoadPageForScene(
-        'Scenes/Loading.scene',
-        Laya.Handler.create(this, () => {
-            // Honor.director.runScene('scenes/login.scene', '参数1', '参数2');
-            Login.preEnter();
-        }),
-    );
+declare global {
+    interface Window {
+        CDN_VERSION: string;
+    }
 }
 
-Honor.run(GameConfig, onStart);
+async function main() {
+    await Honor.run(GameConfig, {
+        versionPath: 'version.json',
+        defaultVersion: window.CDN_VERSION,
+    });
+    await Honor.director.setLoadPageForScene('scenes/loading.scene');
+
+    Login.preEnter();
+}
+main();
