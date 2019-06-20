@@ -7,8 +7,9 @@ function onStart() {
     Honor.director.setLoadPageForScene(
         'Scenes/Loading.scene',
         Laya.Handler.create(this, () => {
+            // Honor.director.runScene('scenes/login.scene', '参数1', '参数2');
             Login.preEnter();
-        })
+        }),
     );
 }
 

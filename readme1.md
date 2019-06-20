@@ -1,0 +1,4 @@
+-   dialog 设置 dialog dialog.popupEffect closeEffect
+-   弹出层 this.popupEffect = null 时 无法再次打开
+-   version.json config bin/res
+    -   再项目中使用版本

@@ -3,15 +3,21 @@ import { ui } from '../../ui/layaMaxUI';
 import Start from './start';
 
 export default class Login extends ui.scenes.loginUI implements HonorScene {
-    public static preEnter() {
+    public static async preEnter() {
         Honor.director.runScene('scenes/login.scene', '参数1', '参数2');
     }
     public onMounted(...params) {
         console.log(...params);
-        this.initEvent();
     }
     public onResize(width: number, height: number) {
         console.log('Scene onResize', width, height);
+    }
+    public onAwake(...params) {
+        console.log(...params);
+        this.initEvent();
+    }
+    public onEnable(...params) {
+        console.log(...params);
     }
     private initEvent() {
         const { open_dialog, enter_start } = this;
@@ -19,7 +25,10 @@ export default class Login extends ui.scenes.loginUI implements HonorScene {
         open_dialog.on(CLICK, this, () => {
             console.log('openDialog');
             Honor.director.openDialog('pop/alert.scene', [
-                'this is a message!',
+                'sasdasdasdasd',
+                msg => {
+                    console.log(msg);
+                },
             ]);
         });
         enter_start.on(CLICK, this, () => {
