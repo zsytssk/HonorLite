@@ -6,7 +6,7 @@ export default class Alert extends ui.pop.alertUI implements HonorDialog {
     constructor() {
         super();
         this.popupEffect = null;
-        this.closeEffect = null;
+        // this.closeEffect = null;
     }
     /** 只会在弹出层第一次创建完成的时候执行 */
     public onAwake() {
