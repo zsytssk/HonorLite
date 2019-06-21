@@ -2,11 +2,13 @@
 
 export type GameConfig = any;
 export type HonorExternConfig = {
-    versionPath?: string;
+    versionPath?: {
+        [key: string]: string;
+    };
     defaultVersion?: string;
 };
-const name = "Honor";
-const version = "0.0.1-beta";
+const name = 'Honor';
+const version = '0.0.1-beta';
 let DEBUG_MODE: boolean;
 global {
     interface Window {
@@ -14,23 +16,26 @@ global {
     }
 }
 /** 运行游戏
-  * @param game_config 是Laya自动生成的游戏配置 src/GameConfig
-  * @param extern_config Honor 需要的配置
-  */
-function run(game_config: GameConfig, extern_config?: HonorExternConfig): Promise<void>;
+ * @param game_config 是Laya自动生成的游戏配置 src/GameConfig
+ * @param extern_config Honor 需要的配置
+ */
+function run(
+    game_config: GameConfig,
+    extern_config?: HonorExternConfig,
+): Promise<void>;
 export const Honor: {
     name: string;
     version: string;
     run: typeof run;
-    director: import("./ui/director").DirectorCtor;
+    director: import('./ui/director').DirectorCtor;
     utils: {
-        createSkeleton: typeof import("./utils/createSkeleton").createSkeleton;
-        extend: typeof import("./utils/extends").extend;
-        cutStr: typeof import("./utils/cutStr").cutStr;
-        getStringLength: typeof import("./utils/getStringLength").getStringLength;
-        formatTime: typeof import("./utils/formatTime").formatTime;
-        formatMoney: typeof import("./utils/formatMoney").formatMoney;
-        getHtmlElementSize: typeof import("./utils/getHtmlElementSize").getHtmlElementSize;
+        createSkeleton: typeof import('./utils/createSkeleton').createSkeleton;
+        extend: typeof import('./utils/extends').extend;
+        cutStr: typeof import('./utils/cutStr').cutStr;
+        getStringLength: typeof import('./utils/getStringLength').getStringLength;
+        formatTime: typeof import('./utils/formatTime').formatTime;
+        formatMoney: typeof import('./utils/formatMoney').formatMoney;
+        getHtmlElementSize: typeof import('./utils/getHtmlElementSize').getHtmlElementSize;
         loadRes: typeof loadRes;
     };
     DEBUG_MODE: boolean;
@@ -64,7 +69,10 @@ export type ResItem = {
     type: string;
 };
 /** 加载资源... */
-export function loadRes(res: ResItem[] | string[], on_progress?: FunProgress): Promise<unknown>;
+export function loadRes(
+    res: ResItem[] | string[],
+    on_progress?: FunProgress,
+): Promise<unknown>;
 
 /**  Honor中scene支持的接口 */
 export interface HonorScene {
@@ -91,7 +99,12 @@ export class DirectorViewCtor {
     recoverView(view: any): void;
     getViewByPool(url: any): any;
     /** 通过 view 的 ui 数据创建 view  */
-    createView(data: any, ctor: any, url: string, params?: any[]): Promise<unknown>;
+    createView(
+        data: any,
+        ctor: any,
+        url: string,
+        params?: any[],
+    ): Promise<unknown>;
     setLoadView(type: ViewType, url: string): void;
     setLoadViewVisible(type: ViewType, visible: boolean): void;
     setLoadProgress(type: any, val: any): void;
@@ -128,63 +141,71 @@ export interface HonorDialog extends Laya.Dialog {
 
 type DialogRefKey = string | Ctor<HonorDialog>;
 /**
-    * <code>DialogManager</code> 对话框管理容器，所有的对话框都在该容器内，并且受管理器管理。
-    * 任意对话框打开和关闭，都会触发管理类的open和close事件
-    * 可以通过UIConfig设置弹出框背景透明度，模式窗口点击边缘是否关闭，点击窗口是否切换层次等
-    * 通过设置对话框的zOrder属性，可以更改弹出的层次
-    */
+ * <code>DialogManager</code> 对话框管理容器，所有的对话框都在该容器内，并且受管理器管理。
+ * 任意对话框打开和关闭，都会触发管理类的open和close事件
+ * 可以通过UIConfig设置弹出框背景透明度，模式窗口点击边缘是否关闭，点击窗口是否切换层次等
+ * 通过设置对话框的zOrder属性，可以更改弹出的层次
+ */
 export class DialogManagerCtor extends Laya.DialogManager {
-        popupEffectHandler: Laya.Handler;
-        closeEffectHandler: Laya.Handler;
-        maskLayer: Laya.Sprite;
-        constructor();
-        onResize(width?: number, height?: number): void;
-        /** @todo 逻辑需要整理下 getViewByPool 不再使用... */
-        openDialog(url: DialogRefKey, params?: any[], config?: HonorDialogConfig, use_exist?: boolean): Promise<HonorDialog>;
-        /**
-            * 执行打开对话框。
-            * @param dialog 需要关闭的对象框 <code>Dialog</code> 实例。
-            */
-        doOpen(dialog: any): void;
-        /**
-            * 关闭对话框。
-            * @param dialog 需要关闭的对象框 <code>Dialog</code> 实例。
-            */
-        close(dialog: HonorDialog): void;
-        /**
-            * 执行关闭对话框。
-            * @param dialog 需要关闭的对象框 <code>Dialog</code> 实例。
-            */
-        doClose(dialog: HonorDialog): void;
-        /**
-            * 关闭所有的对话框。
-            */
-        closeAll(): void;
-        /**
-            * 关闭指定name值的对话框。
-            */
-        closeDialogByName(name: string): void;
-        /**
-            * 根据组关闭所有弹出框
-            * @param group 需要关闭的组名称
-            */
-        closeDialogsByGroup(group: string): void;
-        /**
-            * 根据组获取所有对话框
-            * @param group 组名称
-            * @return 对话框数组
-            */
-        getDialogsByGroup(group: string): any[];
-        /**
-            * 根据name获取所有对话框
-            * @param name 对话框的name
-            * @return 对话框
-            */
-        getDialogByName(name: string): laya.display.Node;
+    popupEffectHandler: Laya.Handler;
+    closeEffectHandler: Laya.Handler;
+    maskLayer: Laya.Sprite;
+    constructor();
+    onResize(width?: number, height?: number): void;
+    /** @todo 逻辑需要整理下 getViewByPool 不再使用... */
+    openDialog(
+        url: DialogRefKey,
+        params?: any[],
+        config?: HonorDialogConfig,
+        use_exist?: boolean,
+    ): Promise<HonorDialog>;
+    /**
+     * 执行打开对话框。
+     * @param dialog 需要关闭的对象框 <code>Dialog</code> 实例。
+     */
+    doOpen(dialog: any): void;
+    /**
+     * 关闭对话框。
+     * @param dialog 需要关闭的对象框 <code>Dialog</code> 实例。
+     */
+    close(dialog: HonorDialog): void;
+    /**
+     * 执行关闭对话框。
+     * @param dialog 需要关闭的对象框 <code>Dialog</code> 实例。
+     */
+    doClose(dialog: HonorDialog): void;
+    /**
+     * 关闭所有的对话框。
+     */
+    closeAll(): void;
+    /**
+     * 关闭指定name值的对话框。
+     */
+    closeDialogByName(name: string): void;
+    /**
+     * 根据组关闭所有弹出框
+     * @param group 需要关闭的组名称
+     */
+    closeDialogsByGroup(group: string): void;
+    /**
+     * 根据组获取所有对话框
+     * @param group 组名称
+     * @return 对话框数组
+     */
+    getDialogsByGroup(group: string): any[];
+    /**
+     * 根据name获取所有对话框
+     * @param name 对话框的name
+     * @return 对话框
+     */
+    getDialogByName(name: string): laya.display.Node;
 }
 export {};
 
-export type SceneChangeListener = (cur1: string, cur2: string) => boolean | void;
+export type SceneChangeListener = (
+    cur1: string,
+    cur2: string,
+) => boolean | void;
 export type SceneChangeData = {
     cur: string;
     prev: string;
@@ -207,120 +228,140 @@ export declare type SceneCtor = typeof Laya.Scene | Laya.Dialog;
 export declare class LoaderManagerCtor {
     constructor();
     loadScene(type: ViewType, url: string): Promise<any>;
-    load(res: ResItem[] | string[], type?: ViewType, after_close?: Promise<any>): Promise<unknown>;
+    load(
+        res: ResItem[] | string[],
+        type?: ViewType,
+        after_close?: Promise<any>,
+    ): Promise<unknown>;
 }
 
 export class DirectorCtor {
-        init(): void;
-        /**
-            * 运行场景
-            * @param url 场景的url
-            * @param params 场景 onMounted 接收的参数
-            */
-        runScene(url: string, ...params: any[]): Promise<Laya.Scene | void>;
-        /**
-            * 获取当前正在运行场景
-            * @param url 场景的url
-            * @param params 场景 onMounted 接收的参数
-            */
-        readonly runningScene: HonorScene;
-        /**
-            * 打开弹出层
-            * @param url 弹出层
-            * @param params 场景 onMounted 接收的参数
-            * @param config 弹出层的配置
-            */
-        openDialog(url: any, params?: any[], config?: HonorDialogConfig, use_exist?: boolean): Promise<import("./base/Dialog").HonorDialog>;
-        load(res: ResItem[] | string[], type?: ViewType): Promise<unknown>;
-        getDialogByName(name: any): laya.display.Node;
-        getDialogsByGroup(group: any): any[];
-        closeDialogByName(name: any): void;
-        closeDialogsByGroup(group: any): void;
-        closeAllDialogs(): void;
-        /** 设置场景切换的loading页面
-            * @param url loading页面的url
-            * @param callback 完成的callback
-            */
-        setLoadPageForScene(url: string): void;
-        setLoadPageForDialog(url: string, callback: Laya.Handler): void;
-        onSceneChangeBefore(fn: SceneChangeListener): Promise<void>;
-        onSceneChangeAfter(fn: SceneChangeListener): Promise<void>;
-        clearListener(fn: SceneChangeListener): Promise<void>;
+    init(): void;
+    /**
+     * 运行场景
+     * @param url 场景的url
+     * @param params 场景 onMounted 接收的参数
+     */
+    runScene(url: string, ...params: any[]): Promise<Laya.Scene | void>;
+    /**
+     * 获取当前正在运行场景
+     * @param url 场景的url
+     * @param params 场景 onMounted 接收的参数
+     */
+    readonly runningScene: HonorScene;
+    /**
+     * 打开弹出层
+     * @param url 弹出层
+     * @param params 场景 onMounted 接收的参数
+     * @param config 弹出层的配置
+     */
+    openDialog(
+        url: any,
+        params?: any[],
+        config?: HonorDialogConfig,
+        use_exist?: boolean,
+    ): Promise<import('./base/Dialog').HonorDialog>;
+    load(res: ResItem[] | string[], type?: ViewType): Promise<unknown>;
+    getDialogByName(name: any): laya.display.Node;
+    getDialogsByGroup(group: any): any[];
+    closeDialogByName(name: any): void;
+    closeDialogsByGroup(group: any): void;
+    closeAllDialogs(): void;
+    /** 设置场景切换的loading页面
+     * @param url loading页面的url
+     * @param callback 完成的callback
+     */
+    setLoadPageForScene(url: string): void;
+    setLoadPageForDialog(url: string, callback: Laya.Handler): void;
+    onSceneChangeBefore(fn: SceneChangeListener): Promise<void>;
+    onSceneChangeAfter(fn: SceneChangeListener): Promise<void>;
+    clearListener(fn: SceneChangeListener): Promise<void>;
 }
 
 /**
-  * @public
-  * 创建骨骼动画
-  * @param {String} path 骨骼动画路径
-  * @param {Number} rate 骨骼动画帧率，引擎默认为30，一般传24
-  * @param {Number} type 动画类型 0,使用模板缓冲的数据，模板缓冲的数据，不允许修改	（内存开销小，计算开销小，不支持换装） 1,使用动画自己的缓冲区，每个动画都会有自己的缓冲区，相当耗费内存 （内存开销大，计算开销小，支持换装） 2,使用动态方式，去实时去画	（内存开销小，计算开销大，支持换装,不建议使用）
-  *
-  * @return 骨骼动画
-  */
-export function createSkeleton(path: any, rate?: any, type?: any): laya.ani.bone.Skeleton;
+ * @public
+ * 创建骨骼动画
+ * @param {String} path 骨骼动画路径
+ * @param {Number} rate 骨骼动画帧率，引擎默认为30，一般传24
+ * @param {Number} type 动画类型 0,使用模板缓冲的数据，模板缓冲的数据，不允许修改	（内存开销小，计算开销小，不支持换装） 1,使用动画自己的缓冲区，每个动画都会有自己的缓冲区，相当耗费内存 （内存开销大，计算开销小，支持换装） 2,使用动态方式，去实时去画	（内存开销小，计算开销大，支持换装,不建议使用）
+ *
+ * @return 骨骼动画
+ */
+export function createSkeleton(
+    path: any,
+    rate?: any,
+    type?: any,
+): laya.ani.bone.Skeleton;
 
 /**
-  * @public
-  * 将两个或更多对象的内容合并到第一个对象。使用方式见Jquery.extend
-  * 调用方式
-  * Sail.Utils.extend( [deep ], target, object1 [, objectN ] )
-  * Sail.Utils.extend( target [, object1 ] [, objectN ] )
-  *
-  * @return 合并后的对象
-  */
+ * @public
+ * 将两个或更多对象的内容合并到第一个对象。使用方式见Jquery.extend
+ * 调用方式
+ * Sail.Utils.extend( [deep ], target, object1 [, objectN ] )
+ * Sail.Utils.extend( target [, object1 ] [, objectN ] )
+ *
+ * @return 合并后的对象
+ */
 export function extend(): any;
 
 /**
-  * @public
-  * 按指定长度截取字符串
-  * @param {String} str 要截取长度的字符串
-  * @param {Number} length 字符串长度
-  *
-  * @return 截取长度后的字符串
-  */
+ * @public
+ * 按指定长度截取字符串
+ * @param {String} str 要截取长度的字符串
+ * @param {Number} length 字符串长度
+ *
+ * @return 截取长度后的字符串
+ */
 export function cutStr(text: any, length: any): any;
 
 /**
-  * @public
-  * 获取字符串长度，支持中文
-  * @param {String} str 要获取长度的字符串
-  *
-  * @return 字符串长度
-  */
+ * @public
+ * 获取字符串长度，支持中文
+ * @param {String} str 要获取长度的字符串
+ *
+ * @return 字符串长度
+ */
 export function getStringLength(str: any): number;
 
 /**
-  * @public
-  * 将毫秒转换为`{h}小时{m}分钟{s}秒`的格式
-  * @param total 毫秒数
-  *
-  * @return 格式化后的字符串
-  */
+ * @public
+ * 将毫秒转换为`{h}小时{m}分钟{s}秒`的格式
+ * @param total 毫秒数
+ *
+ * @return 格式化后的字符串
+ */
 export function formatTime(total: number, format?: string | string[]): string;
 
 /**
-  * 格式化数字
-  * @param {number} number 要格式化的数字
-  * @param {number} places 保留的小数位，默认不保留
-  * @param {string} symbol 货币符号
-  * @param {string} thousand 千位分隔符，默认为“,”
-  * @param {string} decimal 小数位符号
-  *
-  * @return 格式化后的货币字符
-  */
-export function formatMoney(number?: number, places?: number, symbol?: string, thousand?: string, decimal?: string): string;
+ * 格式化数字
+ * @param {number} number 要格式化的数字
+ * @param {number} places 保留的小数位，默认不保留
+ * @param {string} symbol 货币符号
+ * @param {string} thousand 千位分隔符，默认为“,”
+ * @param {string} decimal 小数位符号
+ *
+ * @return 格式化后的货币字符
+ */
+export function formatMoney(
+    number?: number,
+    places?: number,
+    symbol?: string,
+    thousand?: string,
+    decimal?: string,
+): string;
 
 /**
-  * @public
-  * 获取HTMLDivElement的宽高
-  * @param {Laya.HTMLDivElement} html 要获取宽高的HTMLDivElement元素
-  *
-  * @return HTMLDivElement的宽高，{width,height}
-  */
-export function getHtmlElementSize(html: any): {
+ * @public
+ * 获取HTMLDivElement的宽高
+ * @param {Laya.HTMLDivElement} html 要获取宽高的HTMLDivElement元素
+ *
+ * @return HTMLDivElement的宽高，{width,height}
+ */
+export function getHtmlElementSize(
+    html: any,
+): {
     width: any;
     height: any;
 };
 
 export type Ctor<T> = new (...args: any[]) => T;
-
