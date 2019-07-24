@@ -1,12 +1,14 @@
 import { ui } from '../../ui/layaMaxUI';
-import { HonorDialog } from 'honor';
+import honor, { HonorDialog } from 'honor';
 
+export const alert_url = `pop/alert.scene`;
 export default class Alert extends ui.pop.alertUI implements HonorDialog {
     private close_callback: (msg) => void;
     constructor() {
         super();
-        this.popupEffect = null;
-        // this.closeEffect = null;
+    }
+    public static preOpen(msg: string) {
+        return honor.director.openDialog(alert_url, [msg]);
     }
     /** 只会在弹出层第一次创建完成的时候执行 */
     public onAwake() {
@@ -20,11 +22,9 @@ export default class Alert extends ui.pop.alertUI implements HonorDialog {
         const { btn_confirm, btn_cancel } = this;
         const { CLICK } = Laya.Event;
         btn_confirm.on(CLICK, this, () => {
-            console.log('btn_confirm');
             this.close('sdfsdfsdf');
         });
         btn_cancel.on(CLICK, this, () => {
-            console.log('btn_cancel');
             this.close('sdfsfssdfsdfsd1');
         });
     }

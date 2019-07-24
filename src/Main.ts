@@ -1,8 +1,7 @@
 import GameConfig from './GameConfig';
-import { Honor } from 'honor';
-import * as version from '../bin/version.json';
 import './ui/layaMaxUI';
 import Login from './view/scenes/login';
+import honor from 'honor';
 
 declare global {
     interface Window {
@@ -11,11 +10,10 @@ declare global {
 }
 
 async function main() {
-    await Honor.run(GameConfig, {
-        versionPath: version,
+    await honor.run(GameConfig, {
         defaultVersion: window.CDN_VERSION,
     });
-    await Honor.director.setLoadPageForScene('scenes/loading.scene');
+    await honor.director.setLoadPageForScene('scenes/loading.scene');
 
     Login.preEnter();
 }

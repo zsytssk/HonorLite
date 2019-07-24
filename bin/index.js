@@ -8,11 +8,14 @@
 window.screenOrientation = 'sensor_landscape';
 
 //-----libs-begin-----
-loadLib('libs/laya.core.js?v=' + CDN_VERSION);
-loadLib('libs/laya.ani.js?v=' + CDN_VERSION);
-loadLib('libs/laya.html.js?v=' + CDN_VERSION);
-loadLib('libs/laya.ui.js?v=' + CDN_VERSION);
-loadLib('libs/laya.effect.js?v=' + CDN_VERSION);
-loadLib('libs/bytebuffer.js?v=' + CDN_VERSION);
+
+//-----libs-begin-----
+loadLib('libs/laya.core.js');
+loadLib('libs/laya.ani.js');
+loadLib('libs/laya.html.js');
+loadLib('libs/laya.ui.js');
+loadLib('libs/laya.effect.js');
+loadLib('libs/bytebuffer.js');
+
 //-----libs-end-------
 loadLib('js/bundle.js?v=' + CDN_VERSION);
