@@ -14,6 +14,7 @@ async function main() {
         defaultVersion: window.CDN_VERSION,
     });
     await honor.director.setLoadPageForScene('scenes/loading.scene');
+    await honor.director.setLoadPageForDialog('scenes/loading.scene');
 
     Login.preEnter();
 }

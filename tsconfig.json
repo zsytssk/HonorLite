@@ -17,5 +17,5 @@
             "*": ["node_modules/*", "libs/*", "src/*"]
         }
     },
-    "include": ["src", "libs", "test"]
+    "include": ["./src", "./libs", "./test"]
 }

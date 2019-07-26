@@ -1,8 +1,5 @@
-import { HonorScene } from '../directorView';
-import { SceneCtor } from './loaderManager';
-import { loaderManager, directorView } from '../../state';
-import { resolve } from 'dns';
-
+import { loaderManager } from 'honor/state';
+import { HonorScene } from '../view';
 export type SceneChangeListener = (
     cur1: string,
     cur2: string,
@@ -31,17 +28,6 @@ export class SceneManagerCtor {
     public getCurScene() {
         return this.cur_scene;
     }
-    public setLoadingScene(url: string) {
-        return new Promise((resolve, reject) => {
-            Laya.Scene.load(
-                url,
-                Laya.Handler.create(null, scene => {
-                    Laya.Scene.setLoadingPage(scene);
-                    resolve();
-                }),
-            );
-        });
-    }
 
     public switchScene(params: any[], scene: HonorScene): SceneChangeData {
         const { scene_pool } = this;
@@ -69,7 +55,7 @@ export class SceneManagerCtor {
     }
     private callChangeListener(
         type: 'after' | 'before',
-        ...params: string[]
+        ...params: any[]
     ): boolean {
         let listener;
         if (type === 'before') {
@@ -105,21 +91,15 @@ export class SceneManagerCtor {
             if (scene) {
                 change_data = this.switchScene(params, scene);
             } else if (typeof url === 'string') {
-                scene = await new Promise((_resolve, _reject) => {
-                    Laya.Scene.showLoadingPage(undefined, 1);
-                    Laya.Scene.load(
-                        url,
-                        Laya.Handler.create(null, scene => {
-                            _resolve(scene);
-                            Laya.Scene.hideLoadingPage();
-                        }),
-                    );
-                });
+                scene = (await loaderManager.loadScene(
+                    'Scene',
+                    url,
+                )) as HonorScene;
             } else if (typeof url === 'function') {
                 scene = new url();
-                await new Promise((resolve, reject) => {
+                await new Promise((_resolve, _reject) => {
                     scene.once('onViewCreated', this, () => {
-                        return resolve();
+                        return resolve(scene);
                     });
                 });
             }

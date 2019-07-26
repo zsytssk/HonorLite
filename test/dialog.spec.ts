@@ -3,6 +3,7 @@ import Alert, { alert_url } from 'view/pop/alert';
 import { sleep } from './utils/testUtils';
 import honor from 'honor';
 import Tip, { tip_url } from 'view/pop/tip';
+import Alert1 from 'view/pop/alert1';
 
 export default new Test('dialog', runner => {
     /** 打开弹出层 url --> 关闭 */
@@ -131,9 +132,10 @@ export default new Test('dialog', runner => {
         honor.director.closeAllDialogs();
     });
 
-    /** 切换场景 */
-    runner.describe('change_scene', async () => {});
-
-    /** 设置loading */
-    runner.describe('loading', async () => {});
+    /** 关闭所有 弹出层 */
+    runner.describe('alert_loading', async () => {
+        await Alert.preOpen(`this is a test!`);
+        await sleep(1);
+        await Alert1.preOpen(`this is a test!`);
+    });
 });
