@@ -8,16 +8,12 @@ const VIEW_MAP = [
     'AlertManager',
 ];
 
-export interface HonorLoadScene extends HonorScene {
-    /** 关闭前调用 */
-    onReset(): void;
-}
 export interface HonorScene extends Laya.Scene {
     onResize?(width: number, height: number): void;
     onMounted?(...param: any[]): void;
 }
 export type ViewType = 'Scene' | 'Dialog' | 'Load' | 'Alert';
-export type HonorView = HonorScene | HonorDialog | HonorLoadScene;
+export type HonorView = HonorScene | HonorDialog;
 
 const LOAD_VIEW_MAP = {
     Scene: null,

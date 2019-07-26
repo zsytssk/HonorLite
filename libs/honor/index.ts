@@ -109,4 +109,4 @@ export const Honor = {
     DEBUG_MODE,
 };
 
-export default { name, version, run, director, utils, DEBUG_MODE };
+export { name, version, run, director, utils, DEBUG_MODE };

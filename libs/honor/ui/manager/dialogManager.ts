@@ -85,10 +85,10 @@ export class DialogManagerCtor {
 
         /** 设置dialog的配置 */
         this.setDialogConfig(url, dialog, config);
-        dialog_manager.open(dialog, config.closeOther, true);
         if (dialog.onMounted) {
             dialog.onMounted(...params);
         }
+        dialog_manager.open(dialog, config.closeOther, true);
         this.setTopDialogConfig(dialog);
         return dialog;
     }
@@ -99,6 +99,7 @@ export class DialogManagerCtor {
         return new Promise((resolve, reject) => {
             /** 使用dialog_pool_list的弹出层 */
             const { dialog_pool_list } = this;
+            let dialog: DialogInfo;
             for (let i = 0; i < dialog_pool_list.length; i++) {
                 const item = dialog_pool_list[i];
                 if (item.url === url) {
@@ -175,10 +176,9 @@ export class DialogManagerCtor {
             }
         }
         this.setTopDialogConfig(dialog);
-        if (dialog.destroyed) {
-            return;
+        if (dialog_info && !dialog.destroyed) {
+            dialog_pool_list.push(dialog_info);
         }
-        dialog_pool_list.push(dialog_info);
     }
     /** 在dialog打开之后 */
     private injectDoOpenAfter(dialog: HonorDialog) {
