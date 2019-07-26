@@ -11,10 +11,6 @@ const VIEW_MAP = [
 export interface HonorLoadScene extends HonorScene {
     /** 关闭前调用 */
     onReset(): void;
-    /** 打开调用 */
-    onShow(): void;
-    /** 设置进度 */
-    onProgress(val: number): void;
 }
 export interface HonorScene extends Laya.Scene {
     onResize?(width: number, height: number): void;

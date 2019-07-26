@@ -2,13 +2,14 @@ import { ui } from '../../ui/layaMaxUI';
 import { HonorLoadScene } from 'honor';
 
 /** loading场景 */
-export default class LoadingScene extends ui.scenes.loadingUI
+export default class HonorLoadScene extends ui.scenes.loadingUI
     implements HonorLoadScene {
     constructor() {
         super();
+        this.on(Laya.Event.PROGRESS, this, this.onProgress.bind(this));
     }
 
-    public onShow() {
+    public onOpened() {
         console.log('LoadingScene onReset');
     }
 

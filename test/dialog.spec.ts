@@ -1,6 +1,6 @@
-import { Test } from '../testBuilder';
+import { Test } from './testBuilder';
 import Alert, { alert_url } from 'view/pop/alert';
-import { sleep } from '../utils/testUtils';
+import { sleep } from './utils/testUtils';
 import honor from 'honor';
 import Tip, { tip_url } from 'view/pop/tip';
 

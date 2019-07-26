@@ -81,7 +81,7 @@ export class DirectorCtor {
      * @param callback 完成的callback
      */
     public setLoadPageForScene(url: string) {
-        return directorView.setLoadView('Scene', url);
+        return sceneManager.setLoadingScene(url);
     }
 
     public setLoadPageForDialog(url: string) {

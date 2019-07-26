@@ -36,4 +36,7 @@ export default class Login extends ui.scenes.loginUI implements HonorScene {
             Start.preEnter();
         });
     }
+    public onClosed() {
+        // this.destroy();
+    }
 }

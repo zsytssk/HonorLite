@@ -1,7 +1,8 @@
 import { Test, mapTest } from './testBuilder';
 import { TestBuilderCtor } from './testBuilder/testBuilder';
 import { getTestEnable, getTestIgnore } from './utils/testUtils';
-import dialogSpec from './honor/dialog.spec';
+import dialogSpec from './dialog.spec';
+import sceneSpec from './scene.spec';
 declare global {
     interface Window {
         test: typeof test;
@@ -9,7 +10,7 @@ declare global {
 }
 
 const testScope = new Test('top');
-testScope.addChild(dialogSpec);
+testScope.addChild(dialogSpec, sceneSpec);
 const testBuilder = new TestBuilderCtor(testScope, { is_on: true });
 testBuilder.enableDisableTest(getTestEnable(), getTestIgnore());
 testBuilder.init();
