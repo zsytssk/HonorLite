@@ -1,9 +1,10 @@
 import { ui } from '../../ui/layaMaxUI';
-import honor, { HonorDialog } from 'honor';
+import honor, { HonorDialog, HonorDialogConfig } from 'honor';
 
 export const alert_url = `pop/alert.scene`;
 export default class Alert extends ui.pop.alertUI implements HonorDialog {
     private close_callback: (msg) => void;
+    public config: HonorDialogConfig;
     constructor() {
         super();
     }

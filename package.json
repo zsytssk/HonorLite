@@ -29,7 +29,8 @@
         "imagemin-pngquant": "^8.0.0"
     },
     "dependencies": {
-        "es6-promise": "^4.2.8"
+        "es6-promise": "^4.2.8",
+        "tslint": "^5.18.0"
     },
     "repository": {
         "type": "git",
