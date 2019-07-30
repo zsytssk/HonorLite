@@ -1,10 +1,9 @@
-import { ViewType, HonorLoadScene } from '../view';
+import { ViewType, HonorLoadScene } from './view';
 import { ResItem, loadRes } from 'honor/utils/loadRes';
 
 type LoadingMap = Map<ViewType, HonorLoadScene>;
 
 export class LoaderManagerCtor {
-    private is_loading = false;
     private load_map = new Map() as LoadingMap;
     public loadScene(type: ViewType, url: string) {
         return new Promise((resolve, reject) => {

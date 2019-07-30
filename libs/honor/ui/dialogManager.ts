@@ -1,8 +1,8 @@
-import { HonorDialog, HonorDialogConfig, DEFAULT_CONFIG } from '../view';
+import { HonorDialog, HonorDialogConfig, DEFAULT_CONFIG } from './view';
 import { injectAfter } from 'honor/utils/tool';
 import { loaderManager } from 'honor/state';
 
-export type DialogRefUrl = string | Ctor<HonorDialog>;
+export type DialogRefUrl = string | Ctor<HonorDialog> | HonorDialog;
 type DialogInfo = {
     url: DialogRefUrl;
     dialog: HonorDialog;
@@ -71,7 +71,7 @@ export class DialogManagerCtor {
         /** 如果没有找到dialog(use_exist=true), 后者use_exist=false */
         if (!dialog) {
             /** 已经打开dialog, 从wait_dialog_task移除, 放到open_dialog_list中 */
-            const wait_open_dialog = this.toOpenDialog(url, config.closeOther);
+            const wait_open_dialog = this.toOpenDialog(url);
             wait_dialog_task.set(
                 url,
                 wait_open_dialog.then(_dialog => {
@@ -110,7 +110,7 @@ export class DialogManagerCtor {
                 loaderManager.loadScene('Dialog', url).then(_dialog => {
                     resolve(_dialog as HonorDialog);
                 });
-            } else {
+            } else if (typeof url === 'function') {
                 const dialog = new url();
                 if (dialog.active) {
                     resolve(dialog);
@@ -119,6 +119,8 @@ export class DialogManagerCtor {
                         return resolve(dialog);
                     });
                 }
+            } else if (url instanceof Laya.Dialog) {
+                return resolve(url);
             }
         });
     }
