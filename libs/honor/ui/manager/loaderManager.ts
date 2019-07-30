@@ -57,7 +57,6 @@ export class LoaderManagerCtor {
             ctor.load(
                 url,
                 Laya.Handler.create(null, _scene => {
-                    ctor.setLoadingPage(_scene);
                     resolve(_scene);
                 }),
             );

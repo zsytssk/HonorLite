@@ -15,7 +15,10 @@ export class SceneManagerCtor {
     public sceneClassMap: SceneClassMap = {};
     public scene_pool = new Map() as SceneMap;
     private cur_scene: HonorScene;
-
+    private dialog_manager = new Laya.DialogManager();
+    constructor() {
+        console.log(this.dialog_manager);
+    }
     public onResize(width, height) {
         if (this.cur_scene) {
             this.cur_scene.size(width, height);
