@@ -1,6 +1,5 @@
-import { ui } from '../../ui/layaMaxUI';
-import { HonorLoadScene, HonorDialog } from 'honor/ui/view';
 import { Honor } from 'honor';
+import { ui } from '../../ui/layaMaxUI';
 
 /** loading场景 */
 export default class Loading extends ui.scenes.loadingUI {
