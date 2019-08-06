@@ -4,6 +4,7 @@ import { sleep } from './utils/testUtils';
 import honor from 'honor';
 import Tip, { tip_url } from 'view/pop/tip';
 import Alert1 from 'view/pop/alert1';
+import EmptyPop from 'view/pop/emptyPop';
 
 export default new Test('dialog', runner => {
     /** 打开弹出层 url --> 关闭 */
@@ -20,6 +21,10 @@ export default new Test('dialog', runner => {
         console.log(dialog);
         // await sleep(3);
         // honor.director.closeDialogByName(alert_url);
+    });
+    /** 打开弹出层 class --> 关闭 */
+    runner.describe('open_dialog_by_empty_class', async () => {
+        EmptyPop.preEnter();
     });
 
     /** 打开同一个dialog多次, 看是否是同一个dialog */

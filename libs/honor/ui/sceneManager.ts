@@ -1,5 +1,6 @@
 import { loaderManager } from 'honor/state';
 import { HonorScene } from './view';
+import { nodeIsReady, createScene } from '../utils/tool';
 export type SceneChangeListener = (
     cur1: string,
     cur2: string,
@@ -16,9 +17,7 @@ export class SceneManagerCtor {
     public scene_pool = new Map() as SceneMap;
     private cur_scene: HonorScene;
     private dialog_manager = new Laya.DialogManager();
-    constructor() {
-        console.log(this.dialog_manager);
-    }
+    constructor() {}
     public onResize(width, height) {
         if (this.cur_scene) {
             this.cur_scene.size(width, height);
@@ -99,12 +98,12 @@ export class SceneManagerCtor {
                 } else if (typeof url === 'function') {
                     scene = new url();
                     await new Promise((_resolve, _reject) => {
-                        scene.once('onViewCreated', this, () => {
-                            return resolve(scene);
+                        createScene(url).then(dialog => {
+                            return _resolve(dialog);
                         });
                     });
                 } else if (url instanceof Laya.Scene) {
-                    return resolve(scene);
+                    scene = url;
                 }
             }
 
