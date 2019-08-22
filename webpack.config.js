@@ -42,7 +42,7 @@ const dev_config = {
 };
 
 const prod_config = {
-    entry: ['es6-promise', './src/main.ts'],
+    entry: ['es6-promise/auto', './src/main.ts'],
 };
 const prod_ts_compile_option = {
     target: 'es5',

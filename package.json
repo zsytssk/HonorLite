@@ -14,6 +14,7 @@
         "webpack-dev-test": "webpack --ENV=TEST --mode development",
         "webpack-dev-server": "webpack-dev-server --ENV=DEV --mode development",
         "webpack-prod": "webpack --ENV=PROD --mode production",
+        "webpack-prod-server": "webpack-dev-server --ENV=DEV --mode development",
         "compressImg": "node ./script/compressImg/compressImg.js compressImg",
         "genVersion": "node ./script/genVersion/genVersion.js genVersion"
     },

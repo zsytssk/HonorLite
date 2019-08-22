@@ -49,14 +49,23 @@ export class DirectorCtor {
      * @param url 弹出层
      * @param params 场景 onMounted 接收的参数
      * @param config 弹出层的配置
+     * @param use_exist 使用打开弹出层弹出层
+     * @param show_effect 是否使用打开动画
      */
     public openDialog(
         url: DialogRefUrl,
         params: any[] = [],
         config: HonorDialogConfig = {},
         use_exist = false,
+        show_effect = true,
     ) {
-        return dialogManager.openDialog(url, params, config, use_exist);
+        return dialogManager.openDialog(
+            url,
+            params,
+            config,
+            use_exist,
+            show_effect,
+        );
     }
     public load(res: ResItem[] | string[], type?: ViewType) {
         return loaderManager.load(res, type);
@@ -80,6 +89,10 @@ export class DirectorCtor {
 
     public closeAllDialogs() {
         dialogManager.closeAllDialogs();
+    }
+
+    public setLoadViewVisible(type: ViewType, visible: boolean, force = false) {
+        loaderManager.setLoadViewVisible(type, visible, force);
     }
     /** 设置scene loading页面
      */
@@ -115,5 +128,9 @@ export class DirectorCtor {
                 return item !== fn;
             },
         );
+    }
+    /** 隐藏遮罩 */
+    public hideDialog(visible) {
+        dialogManager.hideMask(visible);
     }
 }

@@ -1,5 +1,4 @@
 import GameConfig from './GameConfig';
-import './ui/layaMaxUI';
 import Login from './view/scenes/login';
 import honor from 'honor';
 
@@ -13,9 +12,10 @@ async function main() {
     await honor.run(GameConfig, {
         defaultVersion: window.CDN_VERSION,
     });
-    await honor.director.setLoadPageForScene('scenes/loading.scene');
-    await honor.director.setLoadPageForDialog('scenes/loading.scene');
 
+    const task1 = honor.director.setLoadPageForScene('scenes/loading.scene');
+    const task2 = honor.director.setLoadPageForDialog('scenes/loading.scene');
+    await Promise.all([task1, task2]);
     Login.preEnter();
 }
 main();
