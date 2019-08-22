@@ -1,7 +1,7 @@
 import { Test } from './testBuilder';
 import Alert, { alert_url } from 'view/pop/alert';
 import { sleep } from './utils/testUtils';
-import honor from 'honor';
+import honor, { Honor } from 'honor';
 import Tip, { tip_url } from 'view/pop/tip';
 import Alert1 from 'view/pop/alert1';
 import EmptyPop from 'view/pop/emptyPop';
@@ -142,5 +142,13 @@ export default new Test('dialog', runner => {
         await Alert.preOpen(`this is a test!`);
         await sleep(1);
         await Alert1.preOpen(`this is a test!`);
+    });
+
+    /** dialog zOrder */
+    runner.describe('dialog_zorder', async () => {
+        // const dialog = await Alert.preOpen(`this is a test!`);
+        const dialog2 = await Alert1.preOpen(`this is a test!`);
+        // await Honor.director.openDialog(window.loading);
+        console.log(dialog2);
     });
 });

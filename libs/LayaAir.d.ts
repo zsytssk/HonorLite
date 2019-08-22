@@ -24677,7 +24677,7 @@ declare module laya.display {
      * 			sprite.pivotY = 0;//设置 sprite 对象的垂直方法轴心点坐标。
      * 			Laya.stage.addChild(sprite);//将此 sprite 对象添加到显示列表。
      * 			sprite.on(Event.CLICK, this, onClickSprite);//给 sprite 对象添加点击事件侦听。
-    
+
      * 			shape = new Sprite();//创建一个 Sprite 类的实例对象 sprite 。
      * 			shape.graphics.drawRect(0, 0, 100, 100, "#ccff00", "#ff0000", 2);//绘制一个有边框的填充矩形。
      * 			shape.x = 400;//设置 shape 对象相对于父容器的水平方向坐标值。
@@ -24722,7 +24722,7 @@ declare module laya.display {
      *     sprite.pivotY = 0;//设置 sprite 对象的垂直方法轴心点坐标。
      *     Laya.stage.addChild(sprite);//将此 sprite 对象添加到显示列表。
      *     sprite.on(Event.CLICK, this, onClickSprite);//给 sprite 对象添加点击事件侦听。
-    
+
      *     shape = new laya.display.Sprite();//创建一个 Sprite 类的实例对象 sprite 。
      *     shape.graphics.drawRect(0, 0, 100, 100, "#ccff00", "#ff0000", 2);//绘制一个有边框的填充矩形。
      *     shape.x = 400;//设置 shape 对象相对于父容器的水平方向坐标值。
@@ -24764,7 +24764,7 @@ declare module laya.display {
      *         this.sprite.pivotY = 0;//设置 sprite 对象的垂直方法轴心点坐标。
      *         Laya.stage.addChild(this.sprite);//将此 sprite 对象添加到显示列表。
      *         this.sprite.on(laya.events.Event.CLICK, this, this.onClickSprite);//给 sprite 对象添加点击事件侦听。
-    
+
      *         this.shape = new Sprite();//创建一个 Sprite 类的实例对象 sprite 。
      *         this.shape.graphics.drawRect(0, 0, 100, 100, "#ccff00", "#ff0000", 2);//绘制一个有边框的填充矩形。
      *         this.shape.x = 400;//设置 shape 对象相对于父容器的水平方向坐标值。
@@ -34651,24 +34651,24 @@ declare module laya.ui {
      *		import laya.ui.Tree;
      *		import laya.utils.Browser;
      *		import laya.utils.Handler;
-    
+
      *		public class Tree_Example
      *		{
-    
+
      *			public function Tree_Example()
      *			{
      *				Laya.init(640, 800);
      *				Laya.stage.bgColor = "#efefef";//设置画布的背景颜色。
      *				Laya.loader.load(["resource/ui/vscroll.png", "resource/ui/vscroll$bar.png", "resource/ui/vscroll$down.png", "resource/ui/vscroll$up.png", "resource/ui/clip_selectBox.png", "resource/ui/clip_tree_folder.png", "resource/ui/clip_tree_arrow.png"], Handler.create(this, onLoadComplete));
      *			}
-    
+
      *			private function onLoadComplete():void
      *			{
      *				var xmlString:String;//创建一个xml字符串，用于存储树结构数据。
      *				xmlString = "&lt;root&gt;&lt;item label='box1'&gt;&lt;abc label='child1'/&gt;&lt;abc label='child2'/&gt;&lt;abc label='child3'/&gt;&lt;abc label='child4'/&gt;&lt;abc label='child5'/&gt;&lt;/item&gt;&lt;item label='box2'&gt;&lt;abc label='child1'/&gt;&lt;abc label='child2'/&gt;&lt;abc label='child3'/&gt;&lt;abc label='child4'/&gt;&lt;/item&gt;&lt;/root&gt;";
      *				var domParser:* = new Browser.window.DOMParser();//创建一个DOMParser实例domParser。
      *				var xml:* = domParser.parseFromString(xmlString, "text/xml");//解析xml字符。
-    
+
      *				var tree:Tree = new Tree();//创建一个 Tree 类的实例对象 tree 。
      *				tree.scrollBarSkin = "resource/ui/vscroll.png";//设置 tree 的皮肤。
      *				tree.itemRender = Item;//设置 tree 的项渲染器。
@@ -34681,7 +34681,7 @@ declare module laya.ui {
      *			}
      *		}
      *	}
-    
+
      * import laya.ui.Box;
      * import laya.ui.Clip;
      * import laya.ui.Label;
@@ -34692,7 +34692,7 @@ declare module laya.ui {
      *			this.name = "render";
      *			this.right = 0;
      *			this.left = 0;
-    
+
      *			var selectBox:Clip = new Clip("resource/ui/clip_selectBox.png", 1, 2);
      *			selectBox.name = "selectBox";
      *			selectBox.height = 24;
@@ -34700,13 +34700,13 @@ declare module laya.ui {
      *			selectBox.y = 0;
      *			selectBox.left = 12;
      *			addChild(selectBox);
-    
+
      *			var folder:Clip = new Clip("resource/ui/clip_tree_folder.png", 1, 3);
      *			folder.name = "folder";
      *			folder.x = 14;
      *			folder.y = 4;
      *			addChild(folder);
-    
+
      *			var label:Label = new Label("treeItem");
      *			label.name = "label";
      *			label.color = "#ffff00";
@@ -34717,7 +34717,7 @@ declare module laya.ui {
      *			label.left = 33;
      *			label.right = 0;
      *			addChild(label);
-    
+
      *			var arrow:Clip = new Clip("resource/ui/clip_tree_arrow.png", 1, 2);
      *			arrow.name = "arrow";
      *			arrow.x = 0;
@@ -34735,7 +34735,7 @@ declare module laya.ui {
      *     xmlString = "&lt;root&gt;&lt;item label='box1'&gt;&lt;abc label='child1'/&gt;&lt;abc label='child2'/&gt;&lt;abc label='child3'/&gt;&lt;abc label='child4'/&gt;&lt;abc label='child5'/&gt;&lt;/item&gt;&lt;item label='box2'&gt;&lt;abc label='child1'/&gt;&lt;abc label='child2'/&gt;&lt;abc label='child3'/&gt;&lt;abc label='child4'/&gt;&lt;/item&gt;&lt;/root&gt;";
      *     var domParser = new laya.utils.Browser.window.DOMParser();//创建一个DOMParser实例domParser。
      *     var xml = domParser.parseFromString(xmlString, "text/xml");//解析xml字符。
-    
+
      *     var tree = new laya.ui.Tree();//创建一个 Tree 类的实例对象 tree 。
      *     tree.scrollBarSkin = "resource/ui/vscroll.png";//设置 tree 的皮肤。
      *     tree.itemRender = mypackage.treeExample.Item;//设置 tree 的项渲染器。
@@ -34751,7 +34751,7 @@ declare module laya.ui {
      *         Item.__super.call(this);//初始化父类。
      *         this.right = 0;
      *         this.left = 0;
-    
+
      *         var selectBox = new laya.ui.Clip("resource/ui/clip_selectBox.png", 1, 2);
      *         selectBox.name = "selectBox";//设置 selectBox 的name 为“selectBox”时，将被识别为树结构的项的背景。2帧：悬停时背景、选中时背景。
      *         selectBox.height = 24;
@@ -34759,13 +34759,13 @@ declare module laya.ui {
      *         selectBox.y = 0;
      *         selectBox.left = 12;
      *         this.addChild(selectBox);//需要使用this.访问父类的属性或方法。
-    
+
      *         var folder = new laya.ui.Clip("resource/ui/clip_tree_folder.png", 1, 3);
      *         folder.name = "folder";//设置 folder 的name 为“folder”时，将被识别为树结构的文件夹开启状态图表。2帧：折叠状态、打开状态。
      *         folder.x = 14;
      *         folder.y = 4;
      *         this.addChild(folder);
-    
+
      *         var label = new laya.ui.Label("treeItem");
      *         label.name = "label";//设置 label 的name 为“label”时，此值将用于树结构数据赋值。
      *         label.color = "#ffff00";
@@ -34776,7 +34776,7 @@ declare module laya.ui {
      *         label.left = 33;
      *         label.right = 0;
      *         this.addChild(label);
-    
+
      *         var arrow = new laya.ui.Clip("resource/ui/clip_tree_arrow.png", 1, 2);
      *         arrow.name = "arrow";//设置 arrow 的name 为“arrow”时，将被识别为树结构的文件夹开启状态图表。2帧：折叠状态、打开状态。
      *         arrow.x = 0;
@@ -34790,7 +34790,7 @@ declare module laya.ui {
      * import Browser = laya.utils.Browser;
      * import Handler = laya.utils.Handler;
      * class Tree_Example {
-    
+
      *     constructor() {
      *         Laya.init(640, 800);
      *         Laya.stage.bgColor = "#efefef";//设置画布的背景颜色。
@@ -34801,7 +34801,7 @@ declare module laya.ui {
      *         xmlString = "&lt;root&gt;&lt;item label='box1'&gt;&lt;abc label='child1'/&gt;&lt;abc label='child2'/&gt;&lt;abc label='child3'/&gt;&lt;abc label='child4'/&gt;&lt;abc label='child5'/&gt;&lt;/item&gt;&lt;item label='box2'&gt;&lt;abc  * label='child1'/&gt;&lt;abc label='child2'/&gt;&lt;abc label='child3'/&gt;&lt;abc label='child4'/&gt;&lt;/item&gt;&lt;/root&gt;";
      *         var domParser: any = new Browser.window.DOMParser();//创建一个DOMParser实例domParser。
      *         var xml: any = domParser.parseFromString(xmlString, "text/xml");//解析xml字符。
-    
+
      *         var tree: Tree = new Tree();//创建一个 Tree 类的实例对象 tree 。
      *         tree.scrollBarSkin = "resource/ui/vscroll.png";//设置 tree 的皮肤。
      *         tree.itemRender = Item;//设置 tree 的项渲染器。
@@ -34829,13 +34829,13 @@ declare module laya.ui {
      *         selectBox.y = 0;
      *         selectBox.left = 12;
      *         this.addChild(selectBox);
-    
+
      *         var folder: Clip = new Clip("resource/ui/clip_tree_folder.png", 1, 3);
      *         folder.name = "folder";
      *         folder.x = 14;
      *         folder.y = 4;
      *         this.addChild(folder);
-    
+
      *         var label: Label = new Label("treeItem");
      *         label.name = "label";
      *         label.color = "#ffff00";
@@ -34846,7 +34846,7 @@ declare module laya.ui {
      *         label.left = 33;
      *         label.right = 0;
      *         this.addChild(label);
-    
+
      *         var arrow: Clip = new Clip("resource/ui/clip_tree_arrow.png", 1, 2);
      *         arrow.name = "arrow";
      *         arrow.x = 0;
@@ -35191,7 +35191,7 @@ declare module laya.ui {
      *         Laya.stage.bgColor = "#efefef";//设置画布的背景颜色。
      *         Laya.loader.load(["resource/ui/input.png"], Handler.create(this, this.onLoadComplete));//加载资源。
      *     }
-    
+
      *     private onLoadComplete(): void {
      *         var textArea: TextArea = new TextArea("这个一个TextArea实例。");//创建一个 TextArea 类的实例对象 textArea 。
      *         textArea.skin = "resource/ui/input.png";//设置 textArea 的皮肤。
@@ -35608,18 +35608,18 @@ declare module laya.ui {
      *     };
      *     Laya.class(Item,"mypackage.listExample.Item",_super);//注册类 Item 。
      * })(laya.ui.Box);
-    
+
      * Laya.init(640, 800);//设置游戏画布宽高、渲染模式。
      * Laya.stage.bgColor = "#efefef";//设置画布的背景颜色。
      * var res = ["resource/ui/vscroll.png", "resource/ui/vscroll$bar.png", "resource/ui/vscroll$down.png", "resource/ui/vscroll$up.png"];
      * Laya.loader.load(res, new laya.utils.Handler(this, onLoadComplete));//加载资源。
-    
+
      * function onLoadComplete() {
      *     var arr = [];//创建一个数组，用于存贮列表的数据信息。
      *     for (var i = 0; i &lt; 20; i++) {
      *         arr.push({label: "item" + i});
      *     }
-    
+
      *     var list = new laya.ui.List();//创建一个 List 类的实例对象 list 。
      *     list.itemRender = mypackage.listExample.Item;//设置 list 的单元格渲染器。
      *     list.repeatX = 1;//设置 list 的水平方向单元格数量。
@@ -35631,7 +35631,7 @@ declare module laya.ui {
      *     list.selectHandler = new laya.utils.Handler(this, onSelect);//设置 list 改变选择项执行的处理器。
      *     Laya.stage.addChild(list);//将 list 添加到显示列表。
      * }
-    
+
      * function onSelect(index)
      * {
      *     console.log("当前选择的项目索引： index= ", index);
@@ -37298,7 +37298,7 @@ declare class Laya3D {
      * @param    width  3D画布宽度。
      * @param    height 3D画布高度。
      */
-    static  init(width:number, height:number, antialias?:boolean, alpha?:boolean, premultipliedAlpha?:boolean):void 
+    static  init(width:number, height:number, antialias?:boolean, alpha?:boolean, premultipliedAlpha?:boolean):void
 }
 /**
  * <code>Laya</code> 是全局对象的引用入口集。
@@ -37340,7 +37340,7 @@ declare class Laya {
      * 微信小游戏是否需要在主域中自动将加载的文本数据自动传递到子域，默认 false。
      */
     static isWXPosMsg: boolean;
-        
+
     static class(functionRef:Function, fullQulifiedName:String, superClass:Function, miniName:String):void;
 
     /**
@@ -37351,33 +37351,33 @@ declare class Laya {
      * 上述代码为Laya.Sprite类加入了名为foo的getter/setter。通过Laya.Sprite.foo和Laya.Sprite.foo = val即可触发对应函数。
      * 下面的代码为Laya.Sprite实例加入名为foo的getter/setter。
      * function getter() { console.log('getter'); } function setter(val) { console.log('setter'); } var sp = new Laya.Sprite(); Laya.getset(false, sp, "foo", getter, setter); 通过sp.foo和sp.foo = val即可触发对应函数。
-     * @param isStatic 
-     * @param target 
-     * @param name 
-     * @param getter 
-     * @param setter 
+     * @param isStatic
+     * @param target
+     * @param name
+     * @param getter
+     * @param setter
      */
     static getset(isStatic:Boolean, target:any, name:String, getter:Function, setter:Function):void;
 
     /**
      * JS中实现接口。如： 使Myclass实现接口a.interface: Laya.imps(Myclass.prototype, { a.interface: true});
      * 使MyClass2实现接口a.interface和a.interface2: Laya.imps(MyClass2.prototype, { a.interface: true, a.interface2: true});
-     * @param prototypeChain 
-     * @param superInterfaces 
+     * @param prototypeChain
+     * @param superInterfaces
      */
     static imps(prototypeChain:any, superInterfaces:Object):void;
 
     /**
      * JS中定义接口。如 Laya.interface("a.b.myinterface", null); Laya.interface("a.b.myInterface2", BaseInterface);
-     * @param name 
-     * @param superClass 
+     * @param name
+     * @param superClass
      */
     static interface(name:String, superClass:Function):void;
 
     static superSet(clas,o,prop,value);
 
     static superGet(clas,o,prop);
-	
+
 	static enableDebugPanel(debugJsPath?:String);
 }
 /**全局配置*/
@@ -37451,11 +37451,11 @@ declare module laya.debug {
 declare module laya.debug{
     class DebugPanel{
         /**
-         * 初始化调试面板 
+         * 初始化调试面板
          * @param underGame 是否在游戏下方显示，true:将改变原游戏的大小,false:直接覆盖在游戏上方
          * @param bgColor 调试面板背景颜色
-         * 
-         */     
+         *
+         */
          static init(underGame?:boolean,bgColor?:string):void;
     }
 }

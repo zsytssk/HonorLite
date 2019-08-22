@@ -3,7 +3,7 @@ import { ui } from '../../ui/layaMaxUI';
 
 /** loading场景 */
 export default class Loading extends ui.scenes.loadingUI {
-    public zOrder: 100;
+    public zOrder = 100;
     constructor() {
         super();
         this.popupEffect = undefined;

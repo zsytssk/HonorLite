@@ -9,10 +9,12 @@ export default class Alert1 extends ui.pop.alert1UI implements HonorDialog {
         super();
     }
     public static preOpen(msg: string) {
-        return honor.director.openDialog(alert1_url, [msg]);
+        return honor.director.openDialog(alert1_url, [msg], null, true);
+    }
+    public onMounted() {
+        Laya.stage.on('click', this, this.close);
     }
     public onClosed(t) {
-        console.log(t);
         if (this.close_callback) {
             this.close_callback(t);
         }

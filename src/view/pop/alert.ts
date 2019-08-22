@@ -4,6 +4,7 @@ import honor, { HonorDialog, HonorDialogConfig } from 'honor';
 export const alert_url = `pop/alert.scene`;
 export default class Alert extends ui.pop.alertUI implements HonorDialog {
     private close_callback: (msg) => void;
+    public zOrder = 10;
     public config: HonorDialogConfig;
     constructor() {
         super();

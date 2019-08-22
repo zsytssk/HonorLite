@@ -14,8 +14,8 @@ async function main() {
     });
 
     const task1 = honor.director.setLoadPageForScene('scenes/loading.scene');
-    const task2 = honor.director.setLoadPageForDialog('scenes/loading.scene');
-    await Promise.all([task1, task2]);
+    // const task2 = honor.director.setLoadPageForDialog('scenes/loading.scene');
+    await Promise.all([task1]);
     Login.preEnter();
 }
 main();

@@ -3,9 +3,11 @@ import { TestBuilderCtor } from './testBuilder/testBuilder';
 import { getTestEnable, getTestIgnore } from './utils/testUtils';
 import dialogSpec from './dialog.spec';
 import sceneSpec from './scene.spec';
+import { Honor } from 'honor';
 declare global {
     interface Window {
         test: typeof test;
+        Honor: typeof Honor;
     }
 }
 
@@ -17,3 +19,4 @@ testBuilder.init();
 
 export const test = mapTest(testBuilder.top_scope);
 window.test = test;
+window.Honor = Honor;
